@@ -1,11 +1,11 @@
 import sys 
-input_file = "/home/akshala/Documents/IIITD/fourthSem/IQB/Group25/DNA.fa"   #sys.argv[0]
-# output_file = sys.argv[1]
+input_file = sys.argv[0]
+output_file = sys.argv[1]
 # print(input_file, output_file)
 
 file = open(input_file,'r')
 dna = file.read()
-print(dna)
+# print(dna)
 
 length = len(dna)
 delete_till = 0;
@@ -16,10 +16,10 @@ for i in range(length):
 dna = dna[i+1:]
 
 dna = dna.replace('\n', '')
-print(dna)
+print("DNA sequence: ", dna)
 
 rna = dna.replace("T", "U")
-print(rna)
+print("corresponding RNA sequence: ", rna)
 
 dna_to_protein = {
 	'TTT':'F', 'TTC':'F', 'TTA':'L','TTG':'L',
@@ -45,4 +45,8 @@ for i in range(0,length,3):
 	if(dna[i:i+3] == ''):
 		break
 	protein += dna_to_protein[dna[i:i+3]]
-print(protein)
+print("corresponding Protein sequence: ", protein)
+
+file = open(output_file, 'w')
+file.write(protein)
+file.close()
