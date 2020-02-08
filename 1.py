@@ -1,6 +1,6 @@
 import sys 
-input_file = sys.argv[0]
-output_file = sys.argv[1]
+input_file = '/home/akshala/Documents/IIITD/fourthSem/IQB/assignment1/Group25/DNA.fa'    #sys.argv[0]
+output_file = '/home/akshala/Documents/IIITD/fourthSem/IQB/assignment1/Group25/question1_ouput.fa'    #sys.argv[1]
 # print(input_file, output_file)
 
 file = open(input_file,'r')
@@ -49,4 +49,4 @@ print("corresponding Protein sequence: ", protein)
 
 file = open(output_file, 'w')
 file.write(protein)
-file.close()
+file.close();
