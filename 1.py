@@ -1,6 +1,12 @@
-import sys 
-input_file = '/home/akshala/Documents/IIITD/fourthSem/IQB/assignment1/Group25/DNA.fa'    #sys.argv[0]
-output_file = '/home/akshala/Documents/IIITD/fourthSem/IQB/assignment1/Group25/question1_ouput.fa'    #sys.argv[1]
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", help = "input filename")
+parser.add_argument("-o", help = "output filename")
+args = parser.parse_args()
+
+input_file = args.i
+output_file = args.o
 # print(input_file, output_file)
 
 file = open(input_file,'r')
