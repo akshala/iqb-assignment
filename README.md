@@ -5,8 +5,13 @@
       python q1.py -i input_file -o output_file
     Input file : DNA.fa
     Output file : q1_output.fa
-The DNA sequence is extracted from the input fasta file. All the Ts are converted to Us and the corrresponding RNA sequence is                 made. Then the genetic coding table is used in the first reading frame to translate to the corresponding protein sequence. The protein sequence is written in the output fasta file.
+The DNA sequence is extracted from the input fasta file. All the Ts are converted to Us and the corrresponding RNA sequence is made. Then the genetic coding table is used in the first reading frame to translate to the corresponding protein sequence. The protein sequence is written in the output fasta file.
    
+ #### q2.py
+    To run the python script type the following on the terminal:
+      python q1.py -i input_file -o output_file
+    Input file : 3mgo.pdb
+    Output file : q2_output.txt
 
 #### q3.py
     To run the python script type the following on the terminal:
