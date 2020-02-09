@@ -2,10 +2,10 @@
 
   #### q1.py
     To run the python script type the following on the terminal:
-      python q1.py -i input_file -o output_file
+      python q1.py -i input_file -o1 output_rna_file -o2 output_protein_file
     Input file : DNA.fa
-    Output file : q1_output.fa
-The DNA sequence is extracted from the input fasta file. All the Ts are converted to Us and the corrresponding RNA sequence is made. Then the genetic coding table is used in the first reading frame to translate to the corresponding protein sequence. The protein sequence is written in the output fasta file.
+    Output file : q1_rna_output.fa, q1_protein_output.fa
+The DNA sequence is extracted from the input fasta file. All the Ts are converted to Us and the corrresponding RNA sequence is made. The RNA sequence is written in the output RNA fasta file.Then the genetic coding table is used in the first reading frame to translate to the corresponding protein sequence. The protein sequence is written in the output protein fasta file.
    
  #### q2.py
     To run the python script type the following on the terminal:
