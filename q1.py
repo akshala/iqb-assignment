@@ -2,11 +2,14 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", help = "input filename")
-parser.add_argument("-o", help = "output filename")
+parser.add_argument("-o1", help = "output rna filename")
+parser.add_argument("-o2", help = "output protein filename")
 args = parser.parse_args()
 
 input_file = args.i
-output_file = args.o
+output_rna_file = args.o1
+output_protein_file = args.o2
+
 # print(input_file, output_file)
 
 file = open(input_file,'r')
@@ -19,13 +22,24 @@ for i in range(length):
 	if dna[i] == '\n':
 		delete_till = i
 		break
+description = dna[:i]
 dna = dna[i+1:]
 
 dna = dna.replace('\n', '')
 print("DNA sequence: ", dna)
 
 rna = dna.replace("T", "U")
-print("corresponding RNA sequence: ", rna)
+rna_list = []
+n = len(rna)
+for i in range(0, n, 60):
+	rna_list.append(rna[i:i+60])
+rna_print = '\n'.join(rna_list)
+print("corresponding RNA sequence: ", rna_print)
+
+file = open(output_rna_file, 'w')
+file.write(description+'\n')
+file.write(rna_print)
+file.close();
 
 rna_to_protein = {
 	'UUU':'F', 'UUC':'F', 'UUA':'L','UUG':'L',
@@ -62,6 +76,7 @@ for i in range(0,length,3):
 		protein += rna_to_protein[rna[i:i+3]]	
 print("corresponding Protein sequence: ", protein)
 
-file = open(output_file, 'w')
+file = open(output_protein_file, 'w')
+file.write(description+'\n')
 file.write(protein)
 file.close();
