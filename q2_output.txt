@@ -1,0 +1,4 @@
+HEADER    IMMUNE SYSTEM                           07-APR-10   3MGO              
+TITLE     CRYSTAL STRUCTURE OF A H5-SPECIFIC CTL EPITOPE DERIVED FROM H5N1      
+TITLE    2 INFLUENZA VIRUS IN COMPLEX WITH HLA-A*0201                           
+RESOLUTION.    2.30 ANGSTROMS.                                       

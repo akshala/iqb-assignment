@@ -1,3 +1,6 @@
+
+import matplotlib.pyplot as plt
+import matplotlib.pylab as pl
 import sys, getopt
 
 ifile = ""
@@ -17,6 +20,8 @@ for opt, arg in opts:
 	elif opt in ("-o", "--ofile"):
 		ofile = arg
 
+print(ifile,ofile)
+
 
 f = open(ifile,'r')
 
@@ -28,9 +33,9 @@ seq2 = ""
 for l in lines:
 	if l[0] == 'M':
 		if seq1 == "":
-			seq1 = l[:-1]
+			seq1 = l
 		else:
-			seq2 = l[:-1]
+			seq2 = l
 
 # seq1 = input()
 # seq2 = input()
@@ -38,35 +43,80 @@ for l in lines:
 n = len(seq1)
 m = len(seq2)
 
-print(n,m)
-
 mat = []
 
 for i in range(n):
 	mat.append([0]*m)
 
-f.close()
-
-
-#Similarity matrix generation
+print(n,m)
 
 for i in range(n):
 	for j in range(m):
 		mat[i][j] = int(seq1[i] == seq2[j])
 
-f = open("Similarity_Matrix.txt",'w')
+# print("SIMILARITY MATRIX")
+# for i in mat:
+# 	print(i)
+# print('\n\n')
 
-s = [i for i in seq2]
-f.write("  "+" ".join(s)+'\n')
-c=0
-for i in mat:
-	s = seq1[c]+" "+' '.join([str(k) for k in i])
-	f.write(s+'\n')
-	c+=1
+#####################	Dotplot		##########################
 
-f.close()
+Dotplot_seq1 = seq1[:-1]
+Dotplot_seq2 = seq2[:-1]
 
-#Sum Matrix Generation
+mat2 = []
+first_seq = [' ']
+for c in Dotplot_seq2:
+	first_seq.append(c)
+mat2.append(first_seq)
+
+n1 = len(Dotplot_seq1)
+m1 = len(Dotplot_seq2)
+
+for i in range(0,n1):
+	row = []
+	row.append(Dotplot_seq1[i])
+	for j in range(0, m1):
+		if(Dotplot_seq1[i] == Dotplot_seq2[j]):
+			row.append('O')
+		else:
+			row.append(' ')
+	mat2.append(row)
+	# print(len(row))
+
+
+pl.figure(figsize = (8,8))
+tb = pl.table(cellText=mat2, loc=(0,0), cellLoc='center')
+
+tc = tb.properties()['child_artists']
+for cell in tc: 
+    cell.set_height(1/m1)
+    cell.set_width(1/n1)
+print("Saving Dotplot.....")
+pl.savefig("Dotplot_accurate.jpg")
+
+
+X = []
+Y = []
+for i in range(len(mat)):
+	for j in range(len(mat[i])):
+		if(mat[i][j] == 1):
+			X.append(j)
+			Y.append((-1)*i)
+
+fig = plt.figure(figsize=(8, 6))
+subplot = fig.add_subplot(111)
+fig.subplots_adjust(top=0.85)
+subplot.set_xlabel(seq2)
+subplot.set_ylabel(seq1[::-1])
+subplot.plot(X,Y,'ro')
+# plt.show()
+plt.savefig("Dotplot_clear.jpg", orientation = "landscape")
+
+
+
+
+
 
 for i in range(n-2,-1,-1):
 	for j in range(m-2,-1,-1):
@@ -74,18 +124,12 @@ for i in range(n-2,-1,-1):
 		col = [mat[k][j+1] for k in range(i+1,n)]
 		mat[i][j] += max(max(row,col))
 
-f = open("Sum_Matrix.txt",'w') # Open file in submlime text for clear view
 
-s = [i for i in seq2]
-f.write("  "+"  ".join(s)+'\n')
-c=0
-for i in mat:
-	j = ["0"*(2-len(str(k)))+str(k) for k in i]
-	s = seq1[c]+" "+' '.join(j)
-	f.write(s+'\n')
-	c+=1
 
-f.close()
+# print("SUM MATRIX")
+# for i in mat:
+# 	print(i)
+
 
 #Traceback
 
@@ -116,19 +160,31 @@ while i < n and j < m:
 
 	a += "_"*(y-j) + seq1[i:x] + seq1[x]
 	b += "_"*(x-i) + seq2[j:y] + seq2[y]
+	# print(x+1,y+1,mat[x][y])
+	# print(a,b)
 	i = x+1
 	j = y+1
 
 a += seq1[i:n]
 b += seq2[j:m]
+fig2 = pl.figure(figsize = (10,10))
+tb1 = pl.table(cellText=mat, loc=(0,0), cellLoc='center')
+
+tc1 = tb1.properties()['child_artists']
+for cell in tc1: 
+    cell.set_height(1/m)
+    cell.set_width(1/n)
 
 print(a)
 print(b)
+
+f.close()
 
 f = open(ofile,'w')
 
 f.write(a+'\n')
 f.write(b+'\n')
 
-f.close()
-
+# fig1.show()
+print("Saving sum matrix.....")
+pl.savefig("Sum_matrix.jpg")
