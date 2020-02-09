@@ -12,7 +12,7 @@ The DNA sequence is extracted from the input fasta file. All the Ts are converte
       python q1.py -i input_file -o output_file
     Input file : 3mgo.pdb
     Output file : q2_output.txt
- Title, header and resolution are extracted from the input pdb file and written in a txt file. 
+ Title, header and resolution are extracted from the input pdb file and written in the output txt file. 
 
 #### q3.py
     To run the python script type the following on the terminal:
