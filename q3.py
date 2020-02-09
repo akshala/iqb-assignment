@@ -17,8 +17,6 @@ for opt, arg in opts:
 	elif opt in ("-o", "--ofile"):
 		ofile = arg
 
-print(ifile,ofile)
-
 
 f = open(ifile,'r')
 
@@ -34,9 +32,6 @@ for l in lines:
 		else:
 			seq2 = l
 
-# seq1 = input()
-# seq2 = input()
-
 n = len(seq1)
 m = len(seq2)
 
@@ -45,30 +40,21 @@ mat = []
 for i in range(n):
 	mat.append([0]*m)
 
-print(n,m)
 
+#Similarity matrix generation
 
 for i in range(n):
 	for j in range(m):
 		mat[i][j] = int(seq1[i] == seq2[j])
 
-# print("SIMILARITY MATRIX")
-# for i in mat:
-# 	print(i)
-# print('\n\n')
 
+#Sum Matrix Generation
 
 for i in range(n-2,-1,-1):
 	for j in range(m-2,-1,-1):
 		row = [mat[i+1][k] for k in range(j+1,m)]
 		col = [mat[k][j+1] for k in range(i+1,n)]
 		mat[i][j] += max(max(row,col))
-
-
-
-# print("SUM MATRIX")
-# for i in mat:
-# 	print(i)
 
 
 #Traceback
@@ -100,8 +86,6 @@ while i < n and j < m:
 
 	a += "_"*(y-j) + seq1[i:x] + seq1[x]
 	b += "_"*(x-i) + seq2[j:y] + seq2[y]
-	# print(x+1,y+1,mat[x][y])
-	# print(a,b)
 	i = x+1
 	j = y+1
 
