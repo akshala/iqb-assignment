@@ -28,17 +28,24 @@ seq2 = ""
 for l in lines:
 	if l[0] == 'M':
 		if seq1 == "":
-			seq1 = l
+			seq1 = l[:-1]
 		else:
-			seq2 = l
+			seq2 = l[:-1]
+
+# seq1 = input()
+# seq2 = input()
 
 n = len(seq1)
 m = len(seq2)
+
+print(n,m)
 
 mat = []
 
 for i in range(n):
 	mat.append([0]*m)
+
+f.close()
 
 
 #Similarity matrix generation
@@ -47,6 +54,17 @@ for i in range(n):
 	for j in range(m):
 		mat[i][j] = int(seq1[i] == seq2[j])
 
+f = open("Similarity_Matrix.txt",'w')
+
+s = [i for i in seq2]
+f.write("  "+" ".join(s)+'\n')
+c=0
+for i in mat:
+	s = seq1[c]+" "+' '.join([str(k) for k in i])
+	f.write(s+'\n')
+	c+=1
+
+f.close()
 
 #Sum Matrix Generation
 
@@ -56,6 +74,18 @@ for i in range(n-2,-1,-1):
 		col = [mat[k][j+1] for k in range(i+1,n)]
 		mat[i][j] += max(max(row,col))
 
+f = open("Sum_Matrix.txt",'w') # Open file in submlime text for clear view
+
+s = [i for i in seq2]
+f.write("  "+"  ".join(s)+'\n')
+c=0
+for i in mat:
+	j = ["0"*(2-len(str(k)))+str(k) for k in i]
+	s = seq1[c]+" "+' '.join(j)
+	f.write(s+'\n')
+	c+=1
+
+f.close()
 
 #Traceback
 
@@ -95,10 +125,10 @@ b += seq2[j:m]
 print(a)
 print(b)
 
-f.close()
-
 f = open(ofile,'w')
 
 f.write(a+'\n')
 f.write(b+'\n')
+
+f.close()
 
